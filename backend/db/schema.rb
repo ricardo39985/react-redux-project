@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_193921) do
+ActiveRecord::Schema.define(version: 2020_05_11_205448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,25 @@ ActiveRecord::Schema.define(version: 2020_05_11_193921) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
+  create_table "bugs", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "name"
+    t.string "severity"
+    t.string "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_bugs_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -75,4 +94,6 @@ ActiveRecord::Schema.define(version: 2020_05_11_193921) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "bugs", "projects"
+  add_foreign_key "projects", "users"
 end
