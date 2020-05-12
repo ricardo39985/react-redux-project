@@ -1,22 +1,33 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  def new
-    byebug
-    user = User.find_by_email(params[:email])
-    if user&.authenticate(params[:password])
+  def create
+    user = User.find_by_email(session_params[:email])
+    if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      msg = { message: 'Login Successful', user: User.select(user.id, :name)}
+
       render json: user, except: [:password_digest]
     else
-      render json: { message: 'Email or password is invalid' }
+      render json: { error: 'Email or password is invalid' }
     end
    end
-
-  def create; end
 
   def destroy
     session[:user_id] = nil
     redirect_to root_url, notice: 'Logged out!'
+  end
+
+  def getCurrentUser
+    if logged_in?
+      render json: current_user, except: [:password_digest]
+    else
+      render json: { notice: 'Not logged in' }
+    end
+  end
+
+  private
+
+  def session_params
+    params.require(:credentials).permit(:email, :password)
   end
 end
