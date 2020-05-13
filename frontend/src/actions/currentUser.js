@@ -1,3 +1,4 @@
+import {resetLoginForm} from '../actions/loginForm'
 export const setCurrentUser = (user) => {
   return {
     type: "SET_CURRENT_USER",
@@ -38,6 +39,7 @@ export const login = (credentials) => {
         } else {
           console.log(d);
           dispatch(setCurrentUser(d));
+          dispatch(resetLoginForm())
         }
       });
   };
