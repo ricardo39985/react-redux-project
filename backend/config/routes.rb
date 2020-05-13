@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :bugs
   get '/signup', to: 'users#new'
   post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
   get 'get_user', to: 'sessions#getCurrentUser'
   resources :users, except: [:index] do
     resources :projects
