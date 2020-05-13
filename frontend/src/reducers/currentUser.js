@@ -4,6 +4,8 @@ export default  (state=null, action)=>{
         return action.user
         case "CLEAR_CURRENT_USER":
         return null
+         case "CLEAR_CURRENT_USER":
+        return null
         default:
             return state;
     }
