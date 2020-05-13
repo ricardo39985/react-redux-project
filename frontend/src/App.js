@@ -4,6 +4,7 @@ import LoginForm from "./Component/LoginForm";
 import { NavBar } from "./Component/NavBar";
 import { getUser } from "./actions/currentUser";
 import { connect } from "react-redux";
+import Logout  from "./Component/Logout";
 
 class App extends Component {
   componentDidMount(){
@@ -14,7 +15,8 @@ class App extends Component {
       <div>
         <div className="App">
           <NavBar />
-          <LoginForm />
+          <LoginForm /> 
+         <Logout/>
         </div>
       </div>
     );
