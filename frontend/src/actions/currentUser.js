@@ -4,7 +4,22 @@ export const setCurrentUser = (user) => {
     user,
   };
 };
+export const clearCurrentUser =() =>{
+  return {type: "CLEAR_CURRENT_USER"}
 
+}
+export const logout =() =>{
+  return dispatch =>{
+    dispatch(clearCurrentUser())
+    return fetch("http://localhost:3000/logout", {
+      credentials: "include",
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+    }
+  })
+  }
+}
 export const login = (credentials) => {
   console.log(credentials);
   return (dispatch) => {
