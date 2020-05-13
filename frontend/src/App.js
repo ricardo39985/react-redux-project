@@ -15,12 +15,17 @@ class App extends Component {
       <div>
         <div className="App">
           <NavBar />
-          <LoginForm /> 
-         <Logout/>
+          {!this.props.currentUser ? <LoginForm /> : <Logout/>  }
+          
+         
         </div>
       </div>
     );
   }
 }
-
-export default connect(null, {getUser})(App);
+const mapStateToProps =(state)=>{
+  return{
+    currentUser: state.currentUser
+  }
+}
+export default connect(mapStateToProps, {getUser})(App);
