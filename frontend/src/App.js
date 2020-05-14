@@ -9,6 +9,7 @@ import MainContainer from "./Component/MainContainer";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import  SignUpForm  from "./Component/SignUpForm";
 import NewProjectForm from "./Component/NewProjectForm";
+import ProjectsContainer from "./Component/ProjectsContainer";
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class App extends Component {
             <Route exact path="/dashboard" component={MainContainer} />
             <Route exact path="/signup" component={SignUpForm} />
             <Route exact path="/projects/new" component={NewProjectForm} />
+            <Route exact path="/projects" component={ProjectsContainer} />
 
             {/* {!this.props.currentUser ? <LoginForm /> : <Logout/>  } */}
             {/* <MainContainer/>  */}
