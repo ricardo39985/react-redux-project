@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateNewProjectForm } from "../actions/projectForm";
+import { updateNewProjectForm, submitNewProject } from "../actions/projectForm";
 
-const NewProjectForm = ({ newProjectForm, updateNewProjectForm }) => {
+const NewProjectForm = ({ newProjectForm, updateNewProjectForm, submitNewProject}) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     const updateForm = {
@@ -11,10 +11,14 @@ const NewProjectForm = ({ newProjectForm, updateNewProjectForm }) => {
     };
     updateNewProjectForm(updateForm);
   };
+  const handleSubmit = (e)=>{
+e.preventDefault()
+submitNewProject(newProjectForm)
+  }
   return (
     <div>
       <h1>New project form</h1>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={newProjectForm.name}
@@ -39,6 +43,6 @@ const mapStateToProps = ({ newProjectForm }) => {
     newProjectForm,
   };
 };
-export default connect(mapStateToProps, { updateNewProjectForm })(
+export default connect(mapStateToProps, { updateNewProjectForm, submitNewProject })(
   NewProjectForm
 );
