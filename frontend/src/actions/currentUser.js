@@ -1,4 +1,6 @@
 import {resetLoginForm} from '../actions/loginForm'
+import { getProjects} from './projects';
+
 export const setCurrentUser = (user) => {
   return {
     type: "SET_CURRENT_USER",
@@ -37,8 +39,9 @@ export const login = (credentials) => {
         if (d.error) {
           console.log("ERROR");
         } else {
-          console.log(d);
+          
           dispatch(setCurrentUser(d));
+          
           dispatch(resetLoginForm())
         }
       });
@@ -58,8 +61,9 @@ export const getUser = () => {
         if (d.notice) {
           console.log("ERROR");
         } else {
-          console.log(d);
+          // console.log(d);
           dispatch(setCurrentUser(d));
+          dispatch(getProjects())
         }
       });
   };
