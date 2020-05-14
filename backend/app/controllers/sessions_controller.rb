@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
 
-      render json: user, except: [:password_digest]
+      render json: user.to_json, except: [:password_digest]
     else
       render json: { error: 'Email or password is invalid' }
     end
-   end
+  end
 
   def destroy
     session.clear
