@@ -1,8 +1,7 @@
 export default (state =[], action)=>{
     switch (action.type) {
         case "SET_PROJECTS":
-            
-            break;
+            return action.projects
     
         default:
             return state;
