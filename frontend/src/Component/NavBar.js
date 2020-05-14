@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Logout from "./Logout";
 
 const NavBar = ({currentUser}) => {
   return (
@@ -10,14 +11,13 @@ const NavBar = ({currentUser}) => {
             Bug Tracker
           </a>
           <ul id="nav-mobile" className="">
+          
             <li>
               <a href="sass.html">Sass</a>
             </li>
             {!currentUser? <li>
               <a href="/login">Login</a>
-            </li> : <li>
-              <a href="/logout">Logout</a>
-            </li> }
+            </li> : <Logout/> }
             
             
           </ul>
