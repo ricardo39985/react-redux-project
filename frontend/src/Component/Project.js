@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-export default  ({project}) => {
-    return (
-        <div id={project.id}>
-            
-            <p>{project.name}</p>
-        </div>
-    )
-}
-
+export default ({ project }) => {
+  return (
+    <a href= {`/projects/${project.id}`}>
+      <div id={project.id}>
+        <p>{project.name}</p>
+      </div>
+    </a>
+  );
+};
