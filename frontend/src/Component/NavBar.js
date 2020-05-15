@@ -1,8 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import Logout from "./Logout";
-
-const NavBar = ({currentUser}) => {
+import {logout  } from '../actions/currentUser';
+import { withRouter } from "react-router";
+const NavBar = ({currentUser, logout, history}) => {
+  const handleLogout =()=>{
+    logout(history)
+  }
   return (
     <div>
       <nav>
@@ -13,11 +16,20 @@ const NavBar = ({currentUser}) => {
           <ul id="nav-mobile" className="">
           
             <li>
-              <a href="sass.html">Sass</a>
+              <a href="/signup">Signup</a>
+            </li>
+            <li>
+              <a href="/projects">Projects</a>
+            </li>
+            <li>
+              <a href="/projects/new">Add Project</a>
             </li>
             {!currentUser? <li>
               <a href="/login">Login</a>
-            </li> : <Logout/> }
+            </li> : <li ><a onClick={(e)=>{
+              logout()
+              history.push("/")
+              }} >Logout</a></li> }
             
             
           </ul>
@@ -29,4 +41,4 @@ const NavBar = ({currentUser}) => {
 const mapStateToProps =({currentUser})=>{
 return{currentUser}
 }
-export default connect(mapStateToProps)(NavBar)
+export default withRouter(connect(mapStateToProps, {logout})(NavBar))
