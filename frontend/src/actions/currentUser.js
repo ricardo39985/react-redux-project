@@ -11,7 +11,7 @@ export const clearCurrentUser =() =>{
   return {type: "CLEAR_CURRENT_USER"}
 
 }
-export const logout =() =>{
+export const logout =(history) =>{
   return dispatch =>{
     dispatch(clearCurrentUser())
     return fetch("http://localhost:3000/logout", {
@@ -20,10 +20,12 @@ export const logout =() =>{
     headers: {
       "Content-type": "application/json",
     }
+  }).then(r=>r.json)
+  .then(d=>{
   })
   }
 }
-export const login = (credentials) => {
+export const login = (credentials, history) => {
   console.log(credentials);
   return (dispatch) => {
     return fetch("http://localhost:3000/login", {
@@ -43,6 +45,8 @@ export const login = (credentials) => {
           dispatch(setCurrentUser(d));
           
           dispatch(resetLoginForm())
+          history.push("/")
+          
         }
       });
   };
