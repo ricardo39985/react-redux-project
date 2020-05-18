@@ -25,7 +25,11 @@ class ProjectsController < ApplicationController
 
   def update; end
 
-  def delete; end
+  def destroy
+    # byebug
+    current_user.projects.find_by(id: params[:id]).destroy
+    render json: {success: "Success"}
+  end
 
   private
 
@@ -33,3 +37,9 @@ class ProjectsController < ApplicationController
     params.require(:projectInfo).permit(:name, :state)
   end
 end
+# Project.all.each do |p|
+#   100.times do
+#     # name, severity, details
+#     p.bugs.create(name: Faker::Name.female_first_name, severity: Faker::Science.element, details: Faker::Superhero.descriptor)
+#   end
+# end
