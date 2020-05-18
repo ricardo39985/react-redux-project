@@ -4,7 +4,6 @@ const initState = {
   password: "",
 };
 export default (state = initState, action) => {
-  console.log(action.type);
   switch (action.type) {
     case "UPDATE_SIGNUP_FORM":
       return action.formdata;
