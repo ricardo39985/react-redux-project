@@ -5,7 +5,8 @@ export const ProjectPage = ({project}) => {
     
     return (
         <div >
-            {project? <li>{project.name}</li> : null}
+            {project? <div><li>{project.name}</li></div> 
+            : null}
         <p></p> 
     </div>
     )
