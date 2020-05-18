@@ -17,7 +17,10 @@ import { ProjectPage } from "./Component/ProjectPage";
 class App extends Component {
   componentDidMount() {
     this.props.getUser();
+  }
+  componentWillMount(){
     this.props.getProjects()
+
   }
   render() {
     const {projects}= this.props
