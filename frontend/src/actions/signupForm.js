@@ -13,8 +13,7 @@ export const resetSignupForm = () => {
   };
 };
 
-export const signup = (credentials) => {
-    console.log(credentials);
+export const signup = (credentials, history) => {
     return (dispatch) => {
       return fetch("http://localhost:3000/signup", {
           credentials: "include",
@@ -33,6 +32,7 @@ export const signup = (credentials) => {
             dispatch(getProjects());
             dispatch(setCurrentUser(d))
             dispatch(resetSignupForm())
+            history.push("/")
           }
         });
     };

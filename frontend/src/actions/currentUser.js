@@ -1,5 +1,5 @@
 import {resetLoginForm} from '../actions/loginForm'
-import { getProjects} from './projects';
+import { getProjects, setProjects, clearProjects} from './projects';
 
 export const setCurrentUser = (user) => {
   return {
@@ -13,15 +13,17 @@ export const clearCurrentUser =() =>{
 }
 export const logout =(history) =>{
   return dispatch =>{
-    dispatch(clearCurrentUser())
     return fetch("http://localhost:3000/logout", {
       credentials: "include",
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
-    }
-  }).then(r=>r.json)
-  .then(d=>{
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      }
+    }).then(r=>r.json)
+    .then(d=>{
+      dispatch(clearCurrentUser())
+      dispatch(clearProjects())
+      history.push("/")
   })
   }
 }
@@ -43,9 +45,9 @@ export const login = (credentials, history) => {
         } else {
           
           dispatch(setCurrentUser(d));
-          
+          dispatch(getProjects())
           dispatch(resetLoginForm())
-          history.push("/")
+          history.push("/dashboard")
           
         }
       });
@@ -65,7 +67,7 @@ export const getUser = () => {
         if (d.notice) {
           console.log("ERROR");
         } else {
-          // console.log(d);
+          console.log(d);
           dispatch(setCurrentUser(d));
           dispatch(getProjects())
         }
