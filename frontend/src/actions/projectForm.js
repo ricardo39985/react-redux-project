@@ -12,7 +12,7 @@ export const resetProjectForm = () => {
   };
 };
 
-export const submitNewProject = (projectInfo) => {
+export const submitNewProject = (projectInfo, history) => {
   return (dispatch) => {
     return fetch("http://localhost:3000/projects", {
       credentials: "include",
@@ -28,6 +28,7 @@ export const submitNewProject = (projectInfo) => {
         } else {
           dispatch(getProjects());
           dispatch(resetProjectForm());
+          history.push("/projects")
         }
       });
   };
